@@ -24,7 +24,6 @@ socket.onerror = function (error) {
 };
 
 
-
 socket.onmessage = function (message) {
 
     if (message.data == "true") {
