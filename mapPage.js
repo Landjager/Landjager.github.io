@@ -26,7 +26,6 @@ socket.onerror = function (error) {
 
 
 socket.onmessage = function (message) {
-    // console.log(message);
 
     if (message.data == "true") {
         limitReached = false;
@@ -97,6 +96,14 @@ socket.onmessage = function (message) {
         console.log(points);
         console.log(hp);
 
+    } else if (message.data.contains("is DEAD")){
+        if (message.data == `${window.location.origin} is DEAD`){
+            console.log("You lost");
+            
+        }else{
+            console.log("You won");
+            
+        }
     }
 }
 
@@ -266,24 +273,25 @@ function displayData() {
         icon: myIcon
     }).addTo(map);
 
-    var latlngs = [
+    var userLatlng = [
         [userPoint.lat, userPoint.lng],
         [fenway.lat, fenway.lng]
     ];
 
-    var latlngs2 = [
+    var enemyLatlng = [
         [enemyLocation.lat, enemyLocation.lng],
         [fenway.lat, fenway.lng]
     ];
 
 
-    var polyline = L.polyline(latlngs, { color: 'green' }).addTo(map);
-    var polyline2 = L.polyline(latlngs2, { color: 'red' }).addTo(map);
+    var polyline = L.polyline(userLatlng, { color: 'green' }).addTo(map);
+    var polyline2 = L.polyline(enemyLatlng, { color: 'red' }).addTo(map);
 
     setTimeout(() => {
         if (hp > 0) {
             initNextRound();
         }else{
+            socket.send("DEAD")
             console.log("DEAD");
             
         }
