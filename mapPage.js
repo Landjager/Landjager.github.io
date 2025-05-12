@@ -95,7 +95,7 @@ socket.onmessage = function (message) {
         console.log(points);
         console.log(hp);
 
-    } else if (message.data.contains("is DEAD")){
+    } else if (message.data.endsWith("is DEAD")){
         if (message.data == `${window.location.origin} is DEAD`){
             console.log("You lost");
             
