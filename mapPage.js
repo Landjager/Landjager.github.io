@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:8887/");
+const socket = new WebSocket("ws://192.168.56.1:8887/");
 let fenway = { lat: 0, lng: 0 };
 let pubData;
 var items;
